@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: alibaba
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: liuzidong
+Implementation-Vendor-Id: net.liuzd.excel-data-to-insert-sql
+Build-Jdk: 1.8.0_60
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/excel-data-to-insert-sql/alibaba
+Created-By: Maven Integration for Eclipse
+

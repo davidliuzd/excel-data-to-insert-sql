@@ -1,0 +1,36 @@
+#
+spring:
+  profiles:
+      # 默认使用开发环境
+      active: dev  
+  devtools:
+     restart:
+        additional-paths: src/main/java
+        enabled: true
+        exclude: templates/**,public/**
+  freemarker:
+     template-loader-path: classpath:/templates/     
+     cache: false
+     charset: UTF-8
+     suffix: .ftl
+     content-type: text/html
+  servlet:
+      multipart:
+         max-request-size: 10MB
+         max-file-size: 10MB
+      
+      
+ # Logger Config     
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    net.liuzd.exceldatatoinsertsql.exceldatatoinsertsql: debug
+  path: d:/logs/exceldatatoinsertsql
+
+resources:
+    #应用名称
+    appname: excel-data-to-insert-sql
+    #日志打印的基础扫描包
+    basepackage: net.liuzd.exceldatatoinsertsql.exceldatatoinsertsql
+
+ 
