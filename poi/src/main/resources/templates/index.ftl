@@ -9,8 +9,8 @@
 <form method="post" enctype="multipart/form-data"
   action="/upload">
   	<input type="hidden" name="insertBath" value="false"  />
-  	<div>表名：<input type="text" name="tableName"  value="t_user"/> </div>
-  	<div>列名：<input type="text" name="columns" value="username,PASSWORD" /> </div>
+  	<div>表名：<input type="text" name="tableName"  value="`user`"/> </div>
+  	<div>列名：<input type="text" name="columns" value="`name`,`age`,`email`" /> </div>
     <div>文件：<input type="file" name="file" accept=".xls,.xlsx" /> </div>
     <div>上传：<input type="submit" value="上传Excel文件" /></div>
 </form>

@@ -45,7 +45,7 @@ public class POIUtil {
                 is = new PushbackInputStream(is, 8);
             }
             //
-            if (isXlsx(file)) {              
+            if (isXlsx(file)) {
                 book = new XSSFWorkbook(is);
             } else {
                 book = new HSSFWorkbook(is);
@@ -68,10 +68,19 @@ public class POIUtil {
 
     public static String readRow(Row row, int columns, String tempSp) throws Exception {
         StringBuilder cellValus = new StringBuilder();
-        Iterator<Cell> iterator = row.cellIterator();
-        while (iterator.hasNext()) {
-            String cellValue = getCellVal(iterator.next());
-            cellValus.append("'").append(cellValue).append("'").append(tempSp);
+        // Iterator<Cell> iterator = row.cellIterator();
+        /*
+         * while (iterator.hasNext()) { String cellValue =
+         * getCellVal(iterator.next());
+         * cellValus.append("'").append(cellValue).append("'").append(tempSp); }
+         */
+        for (int i = 0; i < columns; i++) {
+            Object cellValue = getCellVal(row.getCell(i));
+            if(cellValue instanceof String ) {              
+                cellValus.append("'").append(cellValue).append("'").append(tempSp);
+            }else {
+                cellValus.append(cellValue).append(tempSp);
+            }            
         }
         return StringUtils.removeEnd(cellValus.toString(), tempSp);
     }
@@ -106,16 +115,20 @@ public class POIUtil {
     }
 
     public static String getCellVal(Row row, int cellnum) {
-        return getCellVal(row.getCell(cellnum));
+        return getCellVal(row.getCell(cellnum)).toString();
     }
 
     @SuppressWarnings("deprecation")
-    private static String getCellVal(Cell cell) {
+    public static Object getCellVal(Cell cell) {
         if (null == cell) {
             return "";
         }
-        cell.setCellType(CellType.STRING);
-        return cell.getStringCellValue();
+        CellType type = cell.getCellType();
+        if (type == CellType.NUMERIC) {
+            return new Double(cell.getNumericCellValue()).intValue();
+        }
+        cell.setCellType(CellType.STRING);        
+        return StringUtils.defaultIfBlank(cell.getStringCellValue()," ");
     }
 
     // 创建单元格cell
